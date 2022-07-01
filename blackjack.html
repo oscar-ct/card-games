@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .containerGlow {
+            border: solid #9ecaed;
+            box-shadow: 0 0 10px #9ecaed;
+
+        }
+        body {
+            background-color: #003d00;
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="d-flex justify-content-center align-items-center" style="height: 100px">
+    <h1 style="font-weight: lighter">Blackjack</h1>
+
+</div>
+
+<div class="container">
+    <div id="cpuContainer" class="d-flex">
+        <div class="d-flex flex-column justify-content-center" style="width: 250px; height: 314px">
+            <h2>Opponent</h2>
+            <h2 style="font-weight: lighter">Score: <span id="cpuScore"></span></h2>
+        </div>
+        <div class="d-flex flex-wrap" id="cpuOutput">
+        </div>
+
+    </div>
+
+
+
+    <div style="height: 100px"></div>
+
+    <div id="playerContainer" class="d-flex containerGlow">
+        <div class="d-flex flex-column justify-content-center" style="width: 250px; height: 314px">
+            <h2>You</h2>
+            <h2 style="font-weight: lighter">Score: <span id="playerScore"></span></h2>
+        </div>
+        <div class="d-flex flex-wrap" id="output">
+        </div>
+
+    </div>
+
+
+
+    <h1 id="deckId"></h1>
+
+    <div class="container d-flex justify-content-end">
+        <button id="defeatButton" class="btn btn-danger" style="visibility: hidden">I accept defeat</button>
+    </div>
+
+
+    <div>
+        <button id="newDeckBtn" class="btn btn-outline-light">New Game
+    </button>
+
+        <button id="drawCardFromDeck" class="btn btn-outline-light">Draw Card
+        </button>
+
+        <button id="skip" class="btn btn-outline-light">Skip Turn</button>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="blackjack.js"></script>
+</body>
+</html>
