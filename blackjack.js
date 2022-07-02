@@ -8,24 +8,45 @@ $('#newDeckBtn').click(function () {
    callDeckOfCards()
 });
 
+callDeckOfCards();
+
+deckIds = []
+
+
 
 function callDeckOfCards () {
-
     const request = {"url": requestNewDeck + 1, "method": "GET"}
     $.ajax(request).done(function (data) {
         console.log(data.deck_id)
         $('#deckId').text(data.deck_id)
+        deckIds.push(data.deck_id)
 
     });
+
 }
+
+
+// setTimeout(function (){
+//     console.log(deckIds);
+//
+//     $('#drawCardFromDeck').click(function() {
+//         drawCardsFromDeck(deckIdTEMP)
+//     });
+//
+//
+// }, 500)
+
+
+
+
+
 
 $('#defeatButton').click(function () {
     alert("Loser!!!!")
     location.reload()
 });
 
-const deckId = $('#deckId').val().toString()
-// console.log(deckId)
+
 
 const mapToDOM = (deck) => `<div>
 <img src="${deck.image}">
@@ -33,36 +54,73 @@ const mapToDOM = (deck) => `<div>
 
 
 
-$('#drawCardFromDeck').click(function() {
-    drawCardsFromDeck(deckIdTEMP)
-});
+// $('#drawCardFromDeck').click(function() {
+//     drawCardsFromDeck(deckIdTEMP)
+// });
 
 const deckIdTEMP =
-    "xkvjypqi1kej"
+    "7rg4ekudged7"
+
+
 const playerValue = []
 const cpuValue = []
 
 let clickCountSkip = 0
-$('#skip').click(function () {
-    const sum = cpuValue.reduce((partialSum, a) => partialSum + a, 0);
-    const playerSum =  playerValue.reduce((partialSum, a) => partialSum + a, 0);
-    if (sum >= 17 && playerSum >= 17 && playerSum > sum) {
-        alert("Opponent surrenders!  You WIN!")
-        windowReload()
-    }
-    if (clickCountSkip !== 0 && playerSum > 17) {
-        cpuDrawsCard(deckIdTEMP);
-        clickCountSkip++
-    }
 
-    if (clickCountSkip === 0) {
-        cpuDrawsCard(deckIdTEMP);
-        clickCountSkip++
-    } else {
-        alert("It's your turn")
-        $('#defeatButton').css("visibility", 'unset')
-    }
-})
+setTimeout(function (){
+    console.log(deckIds);
+
+    $('#drawCardFromDeck').click(function() {
+        drawCardsFromDeck(deckIds[0])
+    });
+
+
+    $('#skip').click(function () {
+        const sum = cpuValue.reduce((partialSum, a) => partialSum + a, 0);
+        const playerSum =  playerValue.reduce((partialSum, a) => partialSum + a, 0);
+        if (sum >= 17 && playerSum >= 17 && playerSum > sum) {
+            alert("Opponent surrenders!  You WIN!")
+            windowReload()
+        }
+        if (clickCountSkip !== 0 && playerSum > 17) {
+            cpuDrawsCard(deckIds[0]);
+            clickCountSkip++
+        }
+
+        if (clickCountSkip === 0) {
+            cpuDrawsCard(deckIds[0]);
+            clickCountSkip++
+        } else {
+            alert("It's your turn")
+            $('#defeatButton').css("visibility", 'unset')
+        }
+    });
+
+
+}, 500)
+
+
+
+// $('#skip').click(function () {
+//     const sum = cpuValue.reduce((partialSum, a) => partialSum + a, 0);
+//     const playerSum =  playerValue.reduce((partialSum, a) => partialSum + a, 0);
+//     if (sum >= 17 && playerSum >= 17 && playerSum > sum) {
+//         alert("Opponent surrenders!  You WIN!")
+//         windowReload()
+//     }
+//     if (clickCountSkip !== 0 && playerSum > 17) {
+//         cpuDrawsCard(deckIdTEMP);
+//         clickCountSkip++
+//     }
+//
+//     if (clickCountSkip === 0) {
+//         cpuDrawsCard(deckIdTEMP);
+//         clickCountSkip++
+//     } else {
+//         alert("It's your turn")
+//         $('#defeatButton').css("visibility", 'unset')
+//     }
+// });
 
 function cpuDrawsCard (deckId) {
     $('#playerContainer').removeClass('containerGlow')
